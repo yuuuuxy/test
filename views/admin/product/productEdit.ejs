@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataList</title>
+    <link rel="stylesheet" href="/css/public.css" type="text/css">
+</head>
+<style>
+    .query {
+        height: 400px;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        color: #363636;
+        overflow: hidden;
+        margin: 20px 0;
+    }
+    .query-title{
+        padding:0 10px;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid lightgray;
+        background-color: #ededec;
+    }
+    .query-btn {
+        height: 30px;
+        padding:0 8px;
+        background-color: white;
+        border-radius:3px;
+        border: 1px solid lightgray;
+        outline: none;
+        cursor: pointer;
+    }
+    .query-func {
+        padding: 20px 30px;
+    }
+</style>
+<body>
+
+<%- include ../public/header.ejs %>
+<%- include ../public/leftarea.ejs %>
+<div class="right-area">
+    <div class="addr">
+        商品管理 / 增加商品
+    </div>
+    <div class="query">
+        <div class="query-title">增加商品</div>
+        <div class="query-func">
+            <form method="post" enctype="multipart/form-data" action="/product/toUpdate">
+                <input type="hidden" value="<%=result._id%>" name="id">
+                <table>
+                    <tr>
+                        <td>商品名称：</td>
+                        <td><input type="text" name="title" value="<%=result.title%>"></td>
+                    </tr>
+                    <tr>
+                        <td>商品图片：</td>
+                        <td><input type="file" name="prodPic"><br/>
+                            <img src="/<%=result.prodPic.path%>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>商品价格：</td>
+                        <td><input type="text" name="price" value="<%=result.price%>"></td>
+                    </tr>
+                    <tr>
+                        <td>商品邮费：</td>
+                        <td><input type="text" name="postage" value="<%=result.postage%>"></td>
+                    </tr>
+                    <tr>
+                        <td>商品描述：</td>
+                        <td><textarea name="discription" id="" cols="30" rows="10" style="width: 683px;height: 140px;"><%=result.discription%></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit"class="query-btn" value="提交">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

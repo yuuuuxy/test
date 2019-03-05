@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>dataList</title>
+    <link rel="stylesheet" href="/css/public.css" type="text/css">
+</head>
+<style>
+    .query {
+        height: 100px;
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        color: #363636;
+        overflow: hidden;
+        margin: 20px 0;
+    }
+    .query-title{
+        padding:0 10px;
+        height: 40px;
+        line-height: 40px;
+        border-bottom: 1px solid lightgray;
+        background-color: #ededec;
+    }
+    .query-func {
+        padding:0 10px;
+        height: 60px;
+        line-height: 60px;
+    }
+    .query-input {
+        height: 25px;
+        padding-left: 10px;
+        margin: 0 3px;
+        border-radius: 3px;
+        border: 1px solid lightgray;
+    }
+    .query-btn {
+        height: 30px;
+        padding:0 8px;
+        background-color: white;
+        border-radius:3px;
+        border: 1px solid lightgray;
+        outline: none;
+        cursor: pointer;
+    }
+    .datagrid table{
+        width: 100%;
+    }
+    .datagrid table tbody td {
+        border-top: 1px solid lightgray;
+        height: 30px;
+    }
+</style>
+<body>
+
+<%- include ../public/header.ejs %>
+<%- include ../public/leftarea.ejs %>
+<div class="right-area">
+    <div class="addr">
+        商品管理 / 商品列表
+    </div>
+    <div class="query">
+        <div class="query-title">搜索</div>
+        <div class="query-func">
+            <form method="post" enctype="multipart/form-data" action="/findByCdt">
+                名称<input type="text" name="title" class="query-input" placeholder="请输入名称"><input class="query-btn" type="submit" value="开始搜索">
+            </form>
+        </div>
+    </div>
+    <div class="datagrid">
+        <table cellspacing="1">
+            <thead>
+            <tr>
+                <td>编号</td>
+                <td>图标</td>
+                <td>名称</td>
+                <td>价格</td>
+                <td>邮费</td>
+                <td>操作</td>
+            </tr>
+            </thead>
+            <tbody>
+               <% for(var i = 0; i< dataList.length;i++){ %>
+               <tr>
+                   <td><%=i%></td>
+                   <td><img src="/<%=dataList[i].prodPic.path%>" alt="no pic"></td>
+                   <td><%=dataList[i].title%></td>
+                   <td><%=dataList[i].price%></td>
+                   <td><%=dataList[i].postage%></td>
+                   <td><a href="/product/toDelete?id=<%=dataList[i]._id%>">删除</a>/<a href="/product/update?_id= <%=dataList[i]._id%>">修改</a> </td>
+               </tr>
+            <% }%>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
